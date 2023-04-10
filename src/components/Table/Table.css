@@ -14,9 +14,20 @@ th {
 .Table:first-child {
   border-radius: 0.7rem !important;
 }
-.status {
-  padding: 8px;
+.adv_status {
+  padding: 8px 13px 8px 13px;
   border-radius: 9px;
+  background: rgba(255, 255, 0, 0.879);
+  color: black;
+}
+
+.edit-btn {
+  margin-right: 2px;
+  background-color: green;
+}
+.edit-btn:hover {
+  border: 1px solid green;
+  color: green;
 }
 
 .Details {
@@ -30,9 +41,8 @@ th {
   }
 }
 
-
 @media screen and (max-width: 768px) {
-  .Table{
+  .Table {
     position: relative;
     display: flex;
     flex-direction: column;

@@ -20,7 +20,6 @@ const Users = () => {
     const getAllUsers = async () => {
       const users = await axios.get("http://localhost:4000/admin/getAllUsers");
       setUsers(users.data);
-      console.log(users.data);
     };
     getAllUsers();
   }, []);
