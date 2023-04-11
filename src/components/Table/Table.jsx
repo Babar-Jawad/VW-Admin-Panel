@@ -7,6 +7,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import "./Table.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -51,10 +53,33 @@ export default function BasicTable() {
     getAllUsers();
   }, []);
 
+  const handleAccept = async (email) => {
+    axios
+      .post("http://localhost:4000/admin/advocate/accept", {
+        email: email,
+      })
+      .then((res) => {
+        toast.success(res.data, {
+          position: "bottom-top",
+          autoClose: 4500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      });
+  };
+  const handleReject = (email) => {
+    console.log(email);
+  };
+
   return (
     <div className="Table">
       {flag && <BasicModal handleModalClick={handleModalClick} img={img} />}
       <h3>Recent Requests for advocate Role</h3>
+      <ToastContainer />
       {users ? (
         <div className="Table">
           <TableContainer
@@ -94,12 +119,30 @@ export default function BasicTable() {
                       />
                     </TableCell>
                     <TableCell align="left" className="Details">
-                      <span className="adv_status">Pending</span>
+                      <span
+                        className={`${
+                          row.status === "Pending"
+                            ? "adv_status_pending"
+                            : "adv_status_accepted"
+                        }`}
+                      >
+                        {row.status}
+                      </span>
                     </TableCell>
                     <TableCell align="left" className="Details">
                       <div className="btn">
-                        <div className="edit-btn">Accept</div>
-                        <div className="dlt-btn">Reject</div>
+                        <div
+                          onClick={() => handleAccept(row.email)}
+                          className="edit-btn"
+                        >
+                          Accept
+                        </div>
+                        <div
+                          onClick={() => handleReject(row.email)}
+                          className="dlt-btn"
+                        >
+                          Reject
+                        </div>
                       </div>
                     </TableCell>
                   </TableRow>

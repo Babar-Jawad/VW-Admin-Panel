@@ -14,10 +14,22 @@ th {
 .Table:first-child {
   border-radius: 0.7rem !important;
 }
-.adv_status {
+.adv_status_pending {
   padding: 8px 13px 8px 13px;
   border-radius: 9px;
   background: rgba(255, 255, 0, 0.879);
+  color: black;
+}
+.adv_status_accepted {
+  padding: 8px 13px 8px 13px;
+  border-radius: 9px;
+  background: rgba(74, 251, 39, 0.879);
+  color: black;
+}
+.adv_status_rejected {
+  padding: 8px 13px 8px 13px;
+  border-radius: 9px;
+  background: rgba(240, 39, 13, 0.879);
   color: black;
 }
 
