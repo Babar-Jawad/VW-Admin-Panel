@@ -17,6 +17,7 @@ const Cards = () => {
               value={card.value}
               png={card.png}
               series={card.series}
+              sub_title={card.sub_title}
             />
           </div>
         );
