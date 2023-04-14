@@ -118,6 +118,8 @@ export default function BasicTable() {
               <TableHead>
                 <TableRow>
                   <TableCell align="left">User Email</TableCell>
+                  <TableCell align="left">Gender</TableCell>
+                  <TableCell align="left">Area of interest</TableCell>
                   <TableCell align="left">Date</TableCell>
                   <TableCell align="left">Image</TableCell>
                   <TableCell align="left">Status</TableCell>
@@ -131,6 +133,8 @@ export default function BasicTable() {
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
                     <TableCell align="left">{row.email}</TableCell>
+                    <TableCell align="left">{row.gender}</TableCell>
+                    <TableCell align="left">{row.interest}</TableCell>
                     <TableCell align="left">
                       {row.createdAt ? row.createdAt : "Not given"}
                     </TableCell>
