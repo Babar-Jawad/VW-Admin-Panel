@@ -24,6 +24,16 @@ const Users = () => {
     getAllUsers();
   }, []);
 
+  useEffect(()=> {
+    const delUsers = async (id) => {
+      const users = await axios.delete("http://localhost:4000/admin/getAllUsers/${id}");
+      setUsers((users.data));
+    };
+    delUsers();
+  },[]);
+
+
+
   return (
     <div style={{ paddingTop: "4rem" }}>
       <h1 className="title">All Registered Users</h1>
@@ -64,7 +74,7 @@ const Users = () => {
                         <div className="edit-btn">
                           <EditIcon />
                         </div>
-                        <div className="dlt-btn">
+                        <div className="dlt-btn" onClick={() => delUsers(_id)}>
                           <DeleteIcon />
                         </div>
                       </div>
