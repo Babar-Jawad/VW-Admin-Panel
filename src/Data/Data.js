@@ -29,12 +29,12 @@ export const SidebarData = [
   {
     icon: UilPackage,
     heading: "Documents",
-    url: "/docs",
+    url: "/documents",
   },
   {
     icon: UilChart,
-    heading: "Analytics",
-    url: "/analytics",
+    heading: "Previous Cases",
+    url: "/previousCases",
   },
 ];
 
