@@ -38,9 +38,13 @@ const Advocates = () => {
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
               <TableHead>
                 <TableRow>
-                  <TableCell>Adv. Name</TableCell>
-                  <TableCell align="left">Adv. Email</TableCell>
-                  <TableCell align="left">Date</TableCell>
+                  <TableCell>License #.</TableCell>
+                  <TableCell>Email</TableCell>
+                  <TableCell align="left">Gender</TableCell>
+                  <TableCell align="left">Contact #</TableCell>
+                  <TableCell align="left">Area</TableCell>
+                  <TableCell align="left">Experience</TableCell>
+                  <TableCell align="left">Specialist</TableCell>
                   <TableCell align="left">Status</TableCell>
                   <TableCell align="left">Actions</TableCell>
                 </TableRow>
@@ -52,12 +56,14 @@ const Advocates = () => {
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
                     <TableCell component="th" scope="row">
-                      {row.name}
+                      {row.license}
                     </TableCell>
                     <TableCell align="left">{row.email}</TableCell>
-                    <TableCell align="left">
-                      {row.createdAt ? row.createdAt : "Not given"}
-                    </TableCell>
+                    <TableCell align="left">{row.gender}</TableCell>
+                    <TableCell align="left">{row.contact}</TableCell>
+                    <TableCell align="left">{row.area}</TableCell>
+                    <TableCell align="left">{row.experience}</TableCell>
+                    <TableCell align="left">{row.interest}</TableCell>
                     <TableCell align="left" className="Details">
                       <span className="status">Active</span>
                     </TableCell>

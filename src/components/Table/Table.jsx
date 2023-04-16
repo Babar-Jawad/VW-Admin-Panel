@@ -59,8 +59,39 @@ export default function BasicTable() {
         email: email,
       })
       .then((res) => {
-        toast.success(res.data, {
-          position: "bottom-top",
+        if (res.data.warning) {
+          toast.warning(res.data.warning, {
+            position: "bottom-center",
+            autoClose: 4500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        } else {
+          toast.success(res.data, {
+            position: "bottom-center",
+            autoClose: 4500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        }
+      });
+  };
+  const handleReject = (email) => {
+    axios
+      .post("http://localhost:4000/admin/advocate/reject", {
+        email: email,
+      })
+      .then((res) => {
+        toast.error(res.data, {
+          position: "bottom-center",
           autoClose: 4500,
           hideProgressBar: false,
           closeOnClick: true,
@@ -70,9 +101,6 @@ export default function BasicTable() {
           theme: "light",
         });
       });
-  };
-  const handleReject = (email) => {
-    console.log(email);
   };
 
   return (
@@ -90,6 +118,8 @@ export default function BasicTable() {
               <TableHead>
                 <TableRow>
                   <TableCell align="left">User Email</TableCell>
+                  <TableCell align="left">Gender</TableCell>
+                  <TableCell align="left">Area of interest</TableCell>
                   <TableCell align="left">Date</TableCell>
                   <TableCell align="left">Image</TableCell>
                   <TableCell align="left">Status</TableCell>
@@ -103,6 +133,8 @@ export default function BasicTable() {
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
                     <TableCell align="left">{row.email}</TableCell>
+                    <TableCell align="left">{row.gender}</TableCell>
+                    <TableCell align="left">{row.interest}</TableCell>
                     <TableCell align="left">
                       {row.createdAt ? row.createdAt : "Not given"}
                     </TableCell>
@@ -123,7 +155,9 @@ export default function BasicTable() {
                         className={`${
                           row.status === "Pending"
                             ? "adv_status_pending"
-                            : "adv_status_accepted"
+                            : row.status === "accepted"
+                            ? "adv_status_accepted"
+                            : "adv_status_rejected"
                         }`}
                       >
                         {row.status}

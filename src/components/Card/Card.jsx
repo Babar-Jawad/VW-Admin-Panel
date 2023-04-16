@@ -40,8 +40,8 @@ const Card = (props) => {
       </div>
       <div className="detail">
         <Png />
-        <span>${props.value}</span>
-        <span>Last 24 hours</span>
+        <span>{props.value}</span>
+        <span>{props.sub_title}</span>
       </div>
     </motion.div>
   );
