@@ -25,11 +25,9 @@ const Users = () => {
     getAllUsers();
   }, []);
 
-  const handleDelete = (email) => {
+  const handleDelete = (id) => {
     axios
-      .delete("http://localhost:4000/admin/deleteUser", {
-        email: email,
-      })
+      .delete(`http://localhost:4000/admin/deleteUser/${id}`)
       .then((res) => {
         toast.error(res.data, {
           position: "bottom-center",
@@ -43,18 +41,6 @@ const Users = () => {
         });
       });
   };
-
-  
-
-  // useEffect(()=> {
-  //   const delUsers = async (id) => {
-  //     const users = await axios.delete("http://localhost:4000/admin/getAllUsers/${id}");
-  //     setUsers((users.data));
-  //   };
-  //   delUsers();
-  // },[]);
-
-
 
   return (
     <div style={{ paddingTop: "4rem" }}>
@@ -97,7 +83,7 @@ const Users = () => {
                         <div className="edit-btn">
                           <EditIcon />
                         </div>
-                        <div className="dlt-btn" onClick={() => handleDelete(row.email)}>
+                        <div className="dlt-btn" onClick={() => handleDelete(row._id)}>
                           <DeleteIcon />
                         </div>
                       </div>
