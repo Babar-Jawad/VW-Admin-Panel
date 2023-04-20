@@ -53,6 +53,7 @@ export default function BasicTable() {
     getAllUsers();
   }, []);
 
+
   const handleAccept = async (email) => {
     axios
       .post("http://localhost:4000/admin/advocate/accept", {
