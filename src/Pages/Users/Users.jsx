@@ -12,6 +12,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
+import { ToastContainer, toast } from "react-toastify";
 
 const Users = () => {
   const [users, setUsers] = useState(null);
@@ -24,9 +25,27 @@ const Users = () => {
     getAllUsers();
   }, []);
 
+  const handleDelete = (id) => {
+    axios
+      .delete(`http://localhost:4000/admin/deleteUser/${id}`)
+      .then((res) => {
+        toast.error(res.data, {
+          position: "bottom-center",
+          autoClose: 4500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      });
+  };
+
   return (
     <div style={{ paddingTop: "4rem" }}>
       <h1 className="title">All Registered Users</h1>
+      <ToastContainer />
       {users ? (
         <div className="Table">
           <TableContainer
@@ -64,7 +83,7 @@ const Users = () => {
                         <div className="edit-btn">
                           <EditIcon />
                         </div>
-                        <div className="dlt-btn">
+                        <div className="dlt-btn" onClick={() => handleDelete(row._id)}>
                           <DeleteIcon />
                         </div>
                       </div>
