@@ -38,6 +38,7 @@ const Advocates = () => {
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
               <TableHead>
                 <TableRow>
+                  <TableCell>Profile</TableCell>
                   <TableCell>License #.</TableCell>
                   <TableCell>Email</TableCell>
                   <TableCell align="left">Gender</TableCell>
@@ -55,6 +56,21 @@ const Advocates = () => {
                     key={row.name}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
+                    <TableCell component="th" scope="row">
+                      <img
+                        src={
+                          row.profile_photo !== "Unavailable"
+                            ? row.profile_photo
+                            : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
+                        }
+                        alt=""
+                        style={{
+                          height: "50px",
+                          width: "50px",
+                          borderRadius: "100px",
+                        }}
+                      />
+                    </TableCell>
                     <TableCell component="th" scope="row">
                       {row.license}
                     </TableCell>
