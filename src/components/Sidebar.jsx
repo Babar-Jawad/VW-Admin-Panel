@@ -64,7 +64,7 @@ const Sidebar = () => {
             );
           })}
           {/* signoutIcon */}
-          <div className="menuItem">
+          <div className="menuItem" style={{ marginTop: "50px" }}>
             <UilSignOutAlt onClick={handleLogout} />
           </div>
         </div>

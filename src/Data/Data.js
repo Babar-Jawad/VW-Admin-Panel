@@ -28,14 +28,14 @@ export const SidebarData = [
   },
   {
     icon: UilPackage,
-    heading: "Documents",
-    url: "/documents",
+    heading: "User Requests",
+    url: "/requests",
   },
-  {
-    icon: UilChart,
-    heading: "Previous Cases",
-    url: "/previousCases",
-  },
+  // {
+  //   icon: UilChart,
+  //   heading: "Previous Cases",
+  //   url: "/previousCases",
+  // },
 ];
 
 // Analytics Cards Data
@@ -47,7 +47,7 @@ export const cardsData = [
       boxShadow: "0px 10px 20px 0px #e0c6f5",
     },
     barValue: 70,
-    value: "15",
+    value: "70",
     sub_title: "Total Users",
     png: UilUsdSquare,
     series: [
@@ -63,8 +63,8 @@ export const cardsData = [
       backGround: "linear-gradient(180deg, #FF919D 0%, #FC929D 100%)",
       boxShadow: "0px 10px 20px 0px #FDC0C7",
     },
-    barValue: 80,
-    value: "10",
+    barValue: 20,
+    value: "20",
     sub_title: "Total Advocates",
     png: UilMoneyWithdrawal,
     series: [
@@ -81,8 +81,8 @@ export const cardsData = [
         "linear-gradient(rgb(248, 212, 154) -146.42%, rgb(255 202 113) -46.42%)",
       boxShadow: "0px 10px 20px 0px #F9D59B",
     },
-    barValue: 60,
-    value: "19",
+    barValue: 10,
+    value: "10",
     sub_title: "Total Requests",
     png: UilClipboardAlt,
     series: [

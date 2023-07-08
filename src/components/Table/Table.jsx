@@ -53,7 +53,6 @@ export default function BasicTable() {
     getAllUsers();
   }, []);
 
-
   const handleAccept = async (email) => {
     axios
       .post("http://localhost:4000/admin/advocate/accept", {
@@ -166,18 +165,20 @@ export default function BasicTable() {
                     </TableCell>
                     <TableCell align="left" className="Details">
                       <div className="btn">
-                        <div
+                        <button
                           onClick={() => handleAccept(row.email)}
                           className="edit-btn"
+                          disabled={row.status === "accepted"}
                         >
                           Accept
-                        </div>
-                        <div
+                        </button>
+                        <button
                           onClick={() => handleReject(row.email)}
                           className="dlt-btn"
+                          disabled={row.status === "rejected"}
                         >
                           Reject
-                        </div>
+                        </button>
                       </div>
                     </TableCell>
                   </TableRow>

@@ -13,9 +13,14 @@ import Paper from "@mui/material/Paper";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import { ToastContainer, toast } from "react-toastify";
+import UpdateModal from "../../components/UpdateModal/UpdateModal";
 
 const Users = () => {
   const [users, setUsers] = useState(null);
+  const [updateModal, setUpdateModal] = useState(false);
+  //for modal
+  const [open, setOpen] = React.useState(true);
+  const [email, setEmail] = useState("");
 
   useEffect(() => {
     const getAllUsers = async () => {
@@ -25,21 +30,24 @@ const Users = () => {
     getAllUsers();
   }, []);
 
+  const handleUpdate = (em) => {
+    setUpdateModal(true);
+    setEmail(em);
+  };
+
   const handleDelete = (id) => {
-    axios
-      .delete(`http://localhost:4000/admin/deleteUser/${id}`)
-      .then((res) => {
-        toast.error(res.data, {
-          position: "bottom-center",
-          autoClose: 4500,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
+    axios.delete(`http://localhost:4000/admin/deleteUser/${id}`).then((res) => {
+      toast.error(res.data, {
+        position: "bottom-center",
+        autoClose: 4500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
       });
+    });
   };
 
   return (
@@ -80,10 +88,16 @@ const Users = () => {
                     </TableCell>
                     <TableCell align="left" className="Details">
                       <div className="btn">
-                        <div className="edit-btn">
+                        <div
+                          className="edit-btn"
+                          onClick={() => handleUpdate(row.email)}
+                        >
                           <EditIcon />
                         </div>
-                        <div className="dlt-btn" onClick={() => handleDelete(row._id)}>
+                        <div
+                          className="dlt-btn"
+                          onClick={() => handleDelete(row._id)}
+                        >
                           <DeleteIcon />
                         </div>
                       </div>
@@ -96,6 +110,13 @@ const Users = () => {
         </div>
       ) : (
         <span style={{ fontSize: "20px" }}>Loading....</span>
+      )}
+      {updateModal && (
+        <UpdateModal
+          open={open}
+          setUpdateModal={setUpdateModal}
+          email={email}
+        />
       )}
     </div>
   );

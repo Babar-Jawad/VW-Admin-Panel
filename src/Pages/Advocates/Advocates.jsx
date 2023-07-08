@@ -12,9 +12,16 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
+import UpdateAdvModal from "../../components/UpdateAdvModal/UpdateAdvModal";
+import { ToastContainer, toast } from "react-toastify";
 
 const Advocates = () => {
   const [advocates, setAdvocates] = useState(null);
+
+  const [updateModal, setUpdateModal] = useState(false);
+  //for modal
+  const [open, setOpen] = React.useState(true);
+  const [email, setEmail] = useState("");
 
   useEffect(() => {
     const getAllAdvocates = async () => {
@@ -26,8 +33,31 @@ const Advocates = () => {
     getAllAdvocates();
   }, []);
 
+  const handleUpdate = (em) => {
+    setUpdateModal(true);
+    setEmail(em);
+  };
+
+  const handleDelete = (email) => {
+    axios
+      .post(`http://localhost:4000/admin/deleteAdv`, { email })
+      .then((res) => {
+        toast.error(res.data.success, {
+          position: "bottom-center",
+          autoClose: 4500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      });
+  };
+
   return (
     <div style={{ paddingTop: "4rem" }}>
+      <ToastContainer />
       <h1 className="title">All Registered Advocated</h1>
       {advocates ? (
         <div className="Table">
@@ -40,6 +70,7 @@ const Advocates = () => {
                 <TableRow>
                   <TableCell>Profile</TableCell>
                   <TableCell>License #.</TableCell>
+                  <TableCell>Name</TableCell>
                   <TableCell>Email</TableCell>
                   <TableCell align="left">Gender</TableCell>
                   <TableCell align="left">Contact #</TableCell>
@@ -74,6 +105,9 @@ const Advocates = () => {
                     <TableCell component="th" scope="row">
                       {row.license}
                     </TableCell>
+                    <TableCell align="left">
+                      {row.name ? row.name : "Dummy"}
+                    </TableCell>
                     <TableCell align="left">{row.email}</TableCell>
                     <TableCell align="left">{row.gender}</TableCell>
                     <TableCell align="left">{row.contact}</TableCell>
@@ -85,10 +119,16 @@ const Advocates = () => {
                     </TableCell>
                     <TableCell align="left" className="Details">
                       <div className="btn">
-                        <div className="edit-btn">
+                        <div
+                          className="edit-btn"
+                          onClick={() => handleUpdate(row.email)}
+                        >
                           <EditIcon />
                         </div>
-                        <div className="dlt-btn">
+                        <div
+                          className="dlt-btn"
+                          onClick={() => handleDelete(row.email)}
+                        >
                           <DeleteIcon />
                         </div>
                       </div>
@@ -101,6 +141,13 @@ const Advocates = () => {
         </div>
       ) : (
         <span style={{ fontSize: "20px" }}>Loading....</span>
+      )}
+      {updateModal && (
+        <UpdateAdvModal
+          open={open}
+          setUpdateModal={setUpdateModal}
+          email={email}
+        />
       )}
     </div>
   );
